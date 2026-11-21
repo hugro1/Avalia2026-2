@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projeto #8 — P26-2A-4AAC-79A1-E099-4F72</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <strong>Projeto #8: Gerenciador de Fichas e Rolagem de Dados para RPG</strong>
+      </div>
+      <div class="discord-badge" id="discordProfile">
+        <a id="discordLoginLink" href="/api/auth/discord" style="color:inherit;text-decoration:none;">
+          <span id="discordUserText">Entrar com Discord OAuth2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <span class="pill">Projeto Oficial #8</span>
+      <h1>Gerenciador de Fichas e Rolagem de Dados para RPG</h1>
+      <p class="desc">Desenvolva um sistema de criação de fichas de personagens e simulação de dados poliédricos (d4, d6, d8, d10, d12, d20). O frontend deve oferecer formulários dinâmicos que calculam modificadores de atributos automaticamente em JavaScript puro, exigindo autenticação OAuth2 do Discord para associar os personagens criados ao jogador. As fichas são salvas como registros estruturados no Cloudflare D1. Além da persistência cadastral, o sistema deve contar com um log de auditoria de rolagens: toda vez que o jogador aciona um teste de atributo, a geração do número pseudoaleatório ocorre na Cloudflare Function, gravando o resultado com data, hora e identificação do autor em uma tabela compartilhada da mesa, evitando fraudes nas jogadas.</p>
+
+      <div class="form-row">
+        <input class="input-text" id="recordInput" type="text" placeholder="Digite um registro para gravar na Cloudflare Function + D1...">
+        <button class="btn-primary" id="sendBtn" type="button">Registrar no Cloudflare D1</button>
+      </div>
+      <div id="statusMessage" style="font-size:0.88rem;font-weight:700;color:#166534;margin-bottom:0.75rem;"></div>
+    </section>
+
+    <section class="card">
+      <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.85rem;">Registros Persistidos (Cloudflare Pages Functions + D1)</h2>
+      <ul class="records-list" id="recordsList">
+        <li>Carregando status da API serverless...</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer id="projectFooter">
+    Chave Única de Auditoria: <code>P26-2A-4AAC-79A1-E099-4F72</code> · Turma 2A · Licenciado sob MIT
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
