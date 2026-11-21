@@ -7,17 +7,17 @@ export async function onRequestGet({ request, env }) {
   const state = url.searchParams.get("state");
   const savedState = getCookie(request, "discord_oauth_state");
 
-  const headers = new Headers({
-    Location: "/",
-    "Cache-Control": "no-store"
-  });
-
   function redirect(error) {
-    headers.set("Location", error ? "/?auth_error=" + encodeURIComponent(error) : "/?login=success");
+    const headers = new Headers({
+      Location: error ? "/?auth_error=" + encodeURIComponent(error) : "/?login=success",
+      "Cache-Control": "no-store"
+    });
+
     headers.append(
       "Set-Cookie",
       "discord_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
     );
+
     return new Response(null, { status: 302, headers });
   }
 
@@ -77,7 +77,12 @@ export async function onRequestGet({ request, env }) {
       env.SESSION_SECRET
     );
 
-    headers.set(
+    const headers = new Headers({
+      Location: "/?login=success",
+      "Cache-Control": "no-store"
+    });
+
+    headers.append(
       "Set-Cookie",
       `discord_session=${session}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=86400`
     );
@@ -86,8 +91,6 @@ export async function onRequestGet({ request, env }) {
       "Set-Cookie",
       "discord_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
     );
-
-    headers.set("Location", "/?login=success");
 
     return new Response(null, { status: 302, headers });
   } catch {
