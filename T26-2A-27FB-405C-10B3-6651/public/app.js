@@ -1,4 +1,3 @@
-
 async function carregarStatus() {
   const listEl = document.getElementById("recordsList");
   const loginLink = document.getElementById("discordLoginLink");
